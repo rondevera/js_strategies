@@ -6,7 +6,7 @@ TestHarness = {
 
     for(var strategyName in TestHarness.strategies){
       resultsHTML += '<tr><th>{{name}}</th><td>{{time}}</td></tr>'
-        .replace('{{name}}', strategyName)
+        .replace('{{name}}', strategyName.replace('<', '&lt;'))
         .replace('{{time}}', (function(){
           var startAt = new Date(), i = iterations;
           while(i--){ TestHarness.strategies[strategyName](); }

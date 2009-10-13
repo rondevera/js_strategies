@@ -9,11 +9,17 @@
   <script type="text/javascript"><!--
     var loopIterations = 10000000;
     TestHarness.strategies = {
-      'i++': function(){
+      'for(i=0; i<max; i++)': function(){
         for(var i = 0; i < loopIterations; i++){}
       },
-      'i--': function(){
+      'for(i=0; i<max; ++i)': function(){
+        for(var i = 0; i < loopIterations; ++i){}
+      },
+      'for(i=max; i>0; i--)': function(){
         for(var i = loopIterations; i > 0; i--){}
+      },
+      'for(i=max; i>0; --i)': function(){
+        for(var i = loopIterations; i > 0; --i){}
       },
       'while(i--)': function(){
         var i = loopIterations; while(i--){}
