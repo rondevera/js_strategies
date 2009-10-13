@@ -2,7 +2,7 @@ TestHarness = {
   strategies: {},
   run: function(iterations){
     if(!iterations){ iterations = 1; }
-    var resultsHTML = '';
+    var resultsHTML = '', minRuntime = -1;
 
     for(var strategyName in TestHarness.strategies){
       resultsHTML += '<tr><th>{{name}}</th><td>{{time}}</td></tr>'
@@ -12,13 +12,19 @@ TestHarness = {
           while(i--){ TestHarness.strategies[strategyName](); }
           var endAt = new Date();
 
-          return (endAt.valueOf() - startAt.valueOf());
+          var runtime = (endAt.valueOf() - startAt.valueOf());
+          if(minRuntime == -1 || runtime < minRuntime){
+            minRuntime = runtime;
+          }
+          return runtime;
         })());
     }
 
     // Show results
     $(function(){
-      $('#results table tbody').append(resultsHTML);
+      var $tbody = $('#results table tbody')
+      $tbody.append(resultsHTML);
+      $tbody.find('td:contains(' + minRuntime + ')').addClass('min');
     });
   }
 };
