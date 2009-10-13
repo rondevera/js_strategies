@@ -5,33 +5,21 @@
   <title>JS Strategies</title>
   <link rel="stylesheet" type="text" href="style.css" />
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+  <script type="text/javascript" src="js/test-harness.js"></script>
   <script type="text/javascript"><!--
-    $(function(){
-      var resultsHTML = '',
-          startAt, endAt,
-          iterations = 10000000,
-          strategies = {
-            'i++': function(){
-              for(var i = 0; i < iterations; i++){}
-            },
-            'i--': function(){
-              for(var i = iterations; i > 0; i--){}
-            },
-            'while(i--)': function(){
-              var i = iterations; while(i--){}
-            }
-          };
-
-      for(var strategyName in strategies){
-        resultsHTML += '<tr><th>' + strategyName + '</th>';
-        startAt = new Date();
-        strategies[strategyName]();
-        endAt = new Date();
-        resultsHTML +=
-          '<td>' + (endAt.valueOf() - startAt.valueOf()) + '</td></tr>';
+    var loopIterations = 10000000;
+    TestHarness.strategies = {
+      'i++': function(){
+        for(var i = 0; i < loopIterations; i++){}
+      },
+      'i--': function(){
+        for(var i = loopIterations; i > 0; i--){}
+      },
+      'while(i--)': function(){
+        var i = loopIterations; while(i--){}
       }
-      $('#results table tbody').append(resultsHTML)
-    });
+    };
+    TestHarness.run(1);
   //--></script>
 </head>
 <body>
