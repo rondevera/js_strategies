@@ -10,9 +10,17 @@ TestHarness = {
         .replace('{{time}}', (function(){
           var startAt = new Date(), i = iterations;
           while(i--){ TestHarness.strategies[strategyName](); }
-          var endAt = new Date();
+          var endAt = new Date(),
+              runtime = (endAt.valueOf() - startAt.valueOf());
 
-          var runtime = (endAt.valueOf() - startAt.valueOf());
+          /*
+          Alternatively:
+          var runtime = 0 - (new Date().valueOf() - (function(i){
+            while(i--){ TestHarness.strategies[strategyName](); }
+            return new Date().valueOf();
+          })(iterations));
+          */
+
           if(minRuntime == -1 || runtime < minRuntime){
             minRuntime = runtime;
           }
