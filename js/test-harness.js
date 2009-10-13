@@ -24,7 +24,8 @@ TestHarness = {
     $(function(){
       var $tbody = $('#results table tbody')
       $tbody.append(resultsHTML);
-      $tbody.find('td:contains(' + minRuntime + ')').addClass('min');
+      $tbody.find('td:contains(' + minRuntime + ')')
+        .parents('tr').addClass('min');
     });
   }
 };
