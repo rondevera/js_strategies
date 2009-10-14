@@ -7,27 +7,27 @@
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
   <script type="text/javascript" src="js/test-harness.js"></script>
   <script type="text/javascript"><!--
-    var reallyLongString = (function(){
-      var string = '', i = 1000;
-      while(i--){ string += 'x'; }
-      return string;
+    (function(){
+      var numStringParts = 100;
+      var reallyLongTemplate = (function(){
+        var template = '', i = numStringParts;
+        while(i--){ template += '{{' + i + '}}'; }
+        return template;
+      })();
+      TestHarness.strategies = {
+        "'1' + '2' + ... + 'xx'": function(){
+          var string = '', i = numStringParts;
+          while(i--){ string += i.toString(); }
+          return string;
+        },
+        "'{{1}}{{2}}...{{xx}}'": function(){
+          var string = reallyLongTemplate, i = numStringParts;
+          while(i--){ string.replace('{{' + i + '}}', i.toString()); }
+          return string;
+        }
+      };
+      TestHarness.run(1000);
     })();
-    TestHarness.strategies = {
-      "'foo' + 'bar' + 'baz'": function(){
-        // return 'foo' + 'bar' + 'baz';
-        return reallyLongString + reallyLongString + reallyLongString;
-      },
-      "'{{x}}{{y}}{{z}}'.replace(...)": function(){
-        return '{{x}}{{y}}{{z}}'
-          // .replace('{{x}}', 'foo')
-          // .replace('{{y}}', 'bar')
-          // .replace('{{z}}', 'baz');
-          .replace('{{x}}', reallyLongString)
-          .replace('{{y}}', reallyLongString)
-          .replace('{{z}}', reallyLongString);
-      }
-    };
-    TestHarness.run(3000);
   //--></script>
 </head>
 <body>
