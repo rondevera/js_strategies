@@ -8,22 +8,34 @@
   <script type="text/javascript" src="js/test-harness.js"></script>
   <script type="text/javascript"><!--
     (function(){
-      var numStringParts = 100;
-      var reallyLongTemplate = (function(){
-        var template = '', i = numStringParts;
-        while(i--){ template += '{{' + i + '}}'; }
-        return template;
-      })();
+      var numStringParts = 100,
+          reallyLongString = (function(){
+            var string = '', i = 50;
+            while(i--){ string += i.toString(); }
+            return string;
+          })(),
+          reallyLongTemplate = (function(){
+            var template = '', i = numStringParts;
+            while(i--){ template += '{{' + i + '}}'; }
+            return template;
+          })();
       TestHarness.strategies = {
         "'1' + '2' + ... + 'xx'": function(){
           var string = '', i = numStringParts;
-          while(i--){ string += i.toString(); }
+          while(i--){ string += i.toString() + reallyLongString; }
           return string;
         },
         "'{{1}}{{2}}...{{xx}}'": function(){
           var string = reallyLongTemplate, i = numStringParts;
-          while(i--){ string.replace('{{' + i + '}}', i.toString()); }
+          while(i--){
+            string.replace('{{' + i + '}}', i.toString() + reallyLongString);
+          }
           return string;
+        },
+        "['1', '2', ..., 'x'].join('')": function(){
+          var parts = [], i = numStringParts;
+          while(i--){ parts.push(i.toString() + reallyLongString); }
+          return parts.join('');
         }
       };
       TestHarness.run(1000);
