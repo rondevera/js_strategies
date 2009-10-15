@@ -1,3 +1,5 @@
+/*** Global ***/
+
 html,body{
   margin:0;
   padding:0;
@@ -50,6 +52,9 @@ a:hover, a:focus, a:active{
 a:visited{
   color:#4a7eca;
 }
+
+/*** index.html ***/
+
 ul#nav{
   margin:2em 0 0 2em;
   padding:0;
@@ -61,6 +66,12 @@ ul#nav li{
   font-size:1.25em;
   line-height:1.5;
 }
+body#page-index p{
+  margin:1.5em 0 0 2em;
+}
+
+/*** Test pages ***/
+
 table{
   margin:0 1.5em;
   padding:1em 0 0;
