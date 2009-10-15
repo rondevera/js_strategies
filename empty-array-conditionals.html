@@ -7,13 +7,13 @@
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
   <script type="text/javascript" src="js/test-harness.js"></script>
   <script type="text/javascript"><!--
-    (function(){
+    $(function(){
       var veryLargeArray = (function(){
         var array = [], i = 1000;
         while(i--){ array.push(i); }
         return array;
       })();
-      TestHarness.strategies = {
+      TestHarness.initialize({
         '[1,2,..,x].length > 0': function(){
           return veryLargeArray.length > 0;
         },
@@ -22,15 +22,13 @@
           // to false (e.g., null, 0, undefined).
           return !!veryLargeArray[0];
         }
-      };
-      TestHarness.run(300000);
-    })();
+      }).run(300000);
+    });
   //--></script>
 </head>
 <body>
   <h1><a href="index.html">JS Strategies</a></h1>
   <h2>Empty Array Conditionals</h2>
-  <div id="results"><table cellspacing="0"><tbody></tbody></table></div>
   <div id="index"><a href="index.html">&laquo; All</a></div>
 </body>
 </html>

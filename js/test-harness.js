@@ -1,5 +1,15 @@
 TestHarness = {
   strategies: {},
+  initialize: function(strategies){
+    // Initialize results container
+    $('h2').after('<div id="results"><table cellspacing="0"><tbody>'
+      + '</tbody></table></div>');
+
+    // Store strategies
+    TestHarness.strategies = strategies;
+
+    return TestHarness;
+  },
   run: function(iterations){
     if(!iterations){ iterations = 1; }
     var resultsHTML = '', minRuntime = -1;
@@ -36,5 +46,7 @@ TestHarness = {
       $tbody.find('td:contains(' + minRuntime + ')')
         .parents('tr').addClass('min');
     });
+
+    return TestHarness;
   }
 };
