@@ -2,11 +2,12 @@ TestHarness = {
   strategies: {},
   initialize: function(strategies){
     // Initialize results container
-    $('h2').after(
-      '<div id="results">'
-      + '<table summary="Test results" cellspacing="0"><tbody></tbody></table>'
-      + '</div>'
-    );
+    $('h2').after([
+      '<div id="results">',
+        '<p class="loading">Running tests...</p>',
+        '<table summary="Test results" cellspacing="0"><tbody></tbody></table>',
+      '</div>'
+    ].join(''))
 
     // Store strategies
     TestHarness.strategies = strategies;
@@ -44,7 +45,9 @@ TestHarness = {
 
     // Show results
     $(function(){
-      var $tbody = $('#results table tbody')
+      var $resultsContainer = $('div#results'),
+          $tbody = $resultsContainer.find('table tbody');
+      $resultsContainer.find('.loading').hide();
       $tbody.append(resultsHTML);
       $tbody.find('td:contains(' + minRuntime + ')')
         .parents('tr').addClass('min');

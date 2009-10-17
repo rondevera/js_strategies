@@ -86,6 +86,11 @@ body#page-index footer{
 
 /*** Test pages ***/
 
+p.loading{
+  margin:2em 0 0 1.75em;
+  padding:0 0 0 25px;
+  background:transparent url(../img/loading-000000-on-CCCCCC.gif) left center no-repeat;
+}
 table{
   margin:0 1.5em;
   padding:1em 0 0;
