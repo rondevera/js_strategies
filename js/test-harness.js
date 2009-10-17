@@ -4,7 +4,7 @@ TestHarness = {
     // Initialize results container
     $('h2').after([
       '<div id="results">',
-        '<p class="loading">Running tests...</p>',
+        '<p class="loading">Running tests&hellip;</p>',
         '<table summary="Test results" cellspacing="0"><tbody></tbody></table>',
       '</div>'
     ].join(''))
@@ -24,14 +24,6 @@ TestHarness = {
         while(i--){ TestHarness.strategies[strategyName](); }
         var endAt = new Date(),
             time = (endAt.valueOf() - startAt.valueOf());
-
-        /*
-        Alternatively:
-        var time = 0 - (new Date().valueOf() - (function(i){
-          while(i--){ TestHarness.strategies[strategyName](); }
-          return new Date().valueOf();
-        })(iterations));
-        */
 
         if(minRuntime == -1 || time < minRuntime){
           minRuntime = time;
