@@ -2,8 +2,11 @@ TestHarness = {
   strategies: {},
   initialize: function(strategies){
     // Initialize results container
-    $('h2').after('<div id="results"><table cellspacing="0"><tbody>'
-      + '</tbody></table></div>');
+    $('h2').after(
+      '<div id="results">'
+      + '<table summary="Test results" cellspacing="0"><tbody></tbody></table>'
+      + '</div>'
+    );
 
     // Store strategies
     TestHarness.strategies = strategies;

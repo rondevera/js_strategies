@@ -55,19 +55,33 @@ a:visited{
 
 /*** index.html ***/
 
-ul#nav{
+body#page-index ul{
   margin:2em 0 0 2em;
   padding:0;
   list-style:none;
 }
-ul#nav li{
+body#page-index ul li{
   margin:0;
   padding:0;
-  font-size:1.25em;
   line-height:1.5;
+}
+body#page-index ul li h2{
+  margin:0;
+  color:#333;
+  font-size:inherit;
+}
+body#page-index ul li ul{
+  margin-top:0;
+  list-style:disc;
 }
 body#page-index p{
   margin:1.5em 0 0 2em;
+}
+body#page-index footer{
+  display:block;
+  margin:2em 0 0 2em;
+  color:#666;
+  font-size:0.75em;
 }
 
 /*** Test pages ***/
