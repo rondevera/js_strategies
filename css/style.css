@@ -4,6 +4,10 @@ html,body{
   margin:0;
   padding:0;
   background:#ccc;
+    background:#ccc -moz-linear-gradient(left top, left bottom, from(#666), to(#ccc)) left 4em repeat-x;
+    background:#ccc -webkit-gradient(linear, left top, left bottom, from(#666), to(#ccc)) left 4em repeat-x;
+    -moz-background-size:100% 20px;
+    -webkit-background-size:100% 20px;
   font-family:"Lucida Grande",Helvetica,Arial,sans-serif;
   font-size:100%;
 }
@@ -23,7 +27,7 @@ h1{
       linear, left top, left bottom, from(#333), to(#090909),
       color-stop(0.5, #191919), color-stop(0.5, #090909)
     );
-  border-bottom:2px solid #999;
+  border-bottom:1px solid #333;
   color:#fff;
   font-size:2em;
   text-shadow:0 -1px 1px #000;
