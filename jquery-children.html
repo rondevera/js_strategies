@@ -8,26 +8,41 @@
   <script type="text/javascript" src="js/test-harness.js"></script>
   <script type="text/javascript"><!--
     $(function(){
+      /*
+      Some findings:
+      - Set balanceFactor to 1 (i, j == 100; 100 iterations). In Safari 4
+        (OS X), `.children` is nearly twice as fast as `>`, while in
+        Firefox 3.5 (OS X), the opposite is true.
+      - Set balanceFactor to 0.5 (i, j == 50; 200 iterations). In both
+        Safari 4 and Firefox 3.5, `>` is ~30% faster than `.children`.
+      - Set balanceFactor to 0.1 (i, j == 10; 1000 iterations). In both
+        Safari 4 and Firefox 3.5, `>` is ~3x (300%) faster than `.children`.
+      */
+
+      var balanceFactor = 0.5;
+        // Values lower than 1 simplify the DOM, and increase the number of
+        // test iterations.
+
       // Set up arbitrary structure for traversal
       var $div = $('<div id="jquery-test-container"></div>').hide();
       $('h2').append($div);
-      var i = 150; while(i--){
+      var i = 100 * balanceFactor; while(i--){
         var $p = $('<p id="p-' + i + '"></p>')
                   .addClass(i % 2 == 0 ? 'even' : 'odd');
         $div.append($p);
-        var j = 150; while(j--){
+        var j = 100 * balanceFactor; while(j--){
           $('p#p-' + j).append('<em>!</em>');
         }
       }
 
       TestHarness.initialize({
-        "$('div#foo').children('p.bar')": function(){
-          return $('div#jquery-test-container').children('p.odd');
-        },
         "$('div#foo > p.bar')": function(){
           return $('div#jquery-test-container > p.odd');
+        },
+        "$('div#foo').children('p.bar')": function(){
+          return $('div#jquery-test-container').children('p.odd');
         }
-      }).run(100);
+      }).run(parseInt(100 / balanceFactor, 10));
     });
   //--></script>
 </head>
