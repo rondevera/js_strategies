@@ -47,6 +47,12 @@
         },
         "$('div#foo').find('p.bar')": function(){
           return $('div#jquery-test-container').find('p.odd');
+        },
+        "$('p.foo em')": function(){
+          return $('p.odd em');
+        },
+        "$('.foo em') // Don't combine tag name and class on left": function(){
+          return $('.odd em');
         }
       }).run(parseInt(100 / balanceFactor, 10));
     });
