@@ -14,10 +14,10 @@
         return array;
       })();
       TestHarness.initialize({
-        '[1,2,..,x].length > 0': function(){
+        '[1,2,..,n].length > 0': function(){
           return veryLargeArray.length > 0;
         },
-        '!![1,2,..,x][0]': function(){
+        '!![1,2,..,n][0]': function(){
           // Shorter syntax, but invalid if the first array element evaluates
           // to false (e.g., null, 0, undefined).
           return !!veryLargeArray[0];

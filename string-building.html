@@ -20,19 +20,19 @@
             return template;
           })();
       TestHarness.initialize({
-        "'1' + '2' + ... + 'xx'": function(){
+        "'1' + '2' + ... + 'n'": function(){
           var string = '', i = numStringParts;
           while(i--){ string += i.toString() + reallyLongString; }
           return string;
         },
-        "'{{1}}{{2}}...{{xx}}'": function(){
+        "'{{1}}{{2}}...{{n}}'": function(){
           var string = reallyLongTemplate, i = numStringParts;
           while(i--){
             string.replace('{{' + i + '}}', i.toString() + reallyLongString);
           }
           return string;
         },
-        "['1', '2', ..., 'x'].join('')": function(){
+        "['1', '2', ..., 'n'].join('')": function(){
           var parts = [], i = numStringParts;
           while(i--){ parts.push(i.toString() + reallyLongString); }
           return parts.join('');
