@@ -4,8 +4,12 @@ html,body{
   margin:0;
   padding:0;
   background:#ccc;
-    background:#ccc -moz-linear-gradient(left top, left bottom, from(#666), to(#ccc)) left 4em repeat-x;
-    background:#ccc -webkit-gradient(linear, left top, left bottom, from(#666), to(#ccc)) left 4em repeat-x;
+    background:#ccc -moz-linear-gradient(
+      left top, left bottom, from(#666), to(#ccc)
+      ) left 4em repeat-x;
+    background:#ccc -webkit-gradient(
+      linear, left top, left bottom, from(#666), to(#ccc)
+      ) left 4em repeat-x;
     -moz-background-size:100% 20px;
     -webkit-background-size:100% 20px;
   font-family:"Lucida Grande",Helvetica,Arial,sans-serif;
@@ -116,7 +120,34 @@ td{
   font-size:0.75em;
   text-align:right;
 }
-tr.min *{
+td.bar{
+  width:30em;
+  padding:0 0 0 1em;
+  text-align:left;
+}
+td.bar em{
+  display:block;
+  padding:0.375em 0.5em;
+  background:#999;
+    background:-moz-linear-gradient(
+      left top, left bottom,
+      from(#c0c0c0), to(#999),
+      color-stop(0.5, #aaa), color-stop(0.5, #a0a0a0)
+    );
+    background:-webkit-gradient(
+      linear, left top, left bottom,
+      from(#c0c0c0), to(#999),
+      color-stop(0.5, #aaa), color-stop(0.5, #a0a0a0)
+    );
+  border-radius:0.375em;
+    -moz-border-radius:0.375em;
+    -webkit-border-radius:0.375em;
+  color:#333;
+  font-size:0.875em;
+  font-style:normal;
+}
+tr.min th,
+tr.min td{
   background:#1d4e9f;
     background:-moz-linear-gradient(
       left top, left bottom, from(#4a7eca), to(#1d4e9f)
@@ -143,6 +174,24 @@ tr.min td{
   border-bottom-right-radius:0.5em;
     -moz-border-radius-bottomright:0.5em;
     -webkit-border-bottom-right-radius:0.5em;
+}
+tr.min td.bar{
+  background:transparent;
+  text-shadow:0 -1px 1px #333;
+}
+tr.min td.bar em{
+  background:#000;
+    background:-moz-linear-gradient(
+      left top, left bottom,
+      from(#606060), to(#333),
+      color-stop(0.5, #444), color-stop(0.5, #404040)
+    );
+    background:-webkit-gradient(
+      linear, left top, left bottom,
+      from(#606060), to(#333),
+      color-stop(0.5, #444), color-stop(0.5, #404040)
+    );
+  color:#fff;
 }
 div#index{
   margin:2em 0 0;

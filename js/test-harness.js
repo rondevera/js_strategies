@@ -16,23 +16,35 @@ TestHarness = {
   },
   run: function(iterations){
     if(!iterations){ iterations = 1; }
-    var resultsHTML = '', minRuntime = -1;
+    var runtimes = {},
+        minRuntime = -1, maxRuntime = -1,
+        resultsHTML = '';
 
     for(var strategyName in TestHarness.strategies){
-      var runtime = (function(){
+      runtimes[strategyName] = (function(){
         var startAt = new Date(), i = iterations;
         while(i--){ TestHarness.strategies[strategyName](); }
         var endAt = new Date(),
             time = (endAt.valueOf() - startAt.valueOf());
 
-        if(minRuntime == -1 || time < minRuntime){
-          minRuntime = time;
-        }
+        if(minRuntime == -1 || time < minRuntime){ minRuntime = time; }
+        if(maxRuntime == -1 || time > maxRuntime){ maxRuntime = time; }
         return time;
       })();
-      resultsHTML += '<tr><th>{{name}}</th><td>{{time}}</td></tr>'
-        .replace('{{name}}', strategyName.replace('<', '&lt;'))
-        .replace('{{time}}', runtime + 'ms');
+    }
+
+    for(var strategyName in runtimes){
+      var runtime = runtimes[strategyName];
+      resultsHTML +=
+        '<tr>' +
+          '<th>' + strategyName.replace('<', '&lt;') + '</th>' + 
+          '<td>' + runtime + 'ms</td>' +
+          '<td class="bar">' +
+            '<em style="width:' + (runtime/maxRuntime * 100) + '%">' +
+              (Math.round(runtime/minRuntime * 100) / 100) + 'x</em>' +
+                // Rounded to two decimal places
+          '</td>'
+        '</tr>';
     }
 
     // Show results
