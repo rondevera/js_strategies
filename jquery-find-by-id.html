@@ -28,11 +28,20 @@
         "$context.find('div#foo')": function(){
           return $('div#jquery-test-container').find('p#p-5');
         },
+        "$context.find('#foo')": function(){
+          return $('div#jquery-test-container').find('#p-5');
+        },
         "$('div#foo') // No $context reference": function(){
           return $('p#p-5');
         },
+        "$('#foo') // No $context reference": function(){
+          return $('#p-5');
+        },
         "$('div#foo', $context)": function(){
           return $('p#p-5', $('div#jquery-test-container'));
+        },
+        "$('#foo', $context)": function(){
+          return $('#p-5', $('div#jquery-test-container'));
         }
       }).run(parseInt(100 / balanceFactor, 10));
     });
