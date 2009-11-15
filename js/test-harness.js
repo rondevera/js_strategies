@@ -35,16 +35,17 @@ TestHarness = {
 
     for(var strategyName in runtimes){
       var runtime = runtimes[strategyName];
-      resultsHTML +=
-        '<tr>' +
-          '<th>' + strategyName.replace('<', '&lt;') + '</th>' + 
-          '<td>' + runtime + 'ms</td>' +
-          '<td class="bar">' +
-            '<em style="width:' + (runtime/maxRuntime * 100) + '%">' +
-              (Math.round(runtime/minRuntime * 100) / 100) + 'x</em>' +
+      resultsHTML += [
+        '<tr>',
+          '<th>', strategyName.replace('<', '&lt;'), '</th>', 
+          '<td>', runtime, 'ms</td>',
+          '<td class="bar', (runtime == minRuntime ? ' min' : ''), '">',
+            '<em style="width:', (runtime/maxRuntime * 100), '%">',
+              (Math.round(runtime/minRuntime * 100) / 100), 'x</em>',
                 // Rounded to two decimal places
-          '</td>'
-        '</tr>';
+          '</td>',
+        '</tr>'
+        ].join('');
     }
 
     // Show results
@@ -53,8 +54,7 @@ TestHarness = {
           $tbody = $resultsContainer.find('table tbody');
       $resultsContainer.find('.loading').hide();
       $tbody.append(resultsHTML);
-      $tbody.find('td:contains(' + minRuntime + ')')
-        .parents('tr').addClass('min');
+      $tbody.find('td.min').parents('tr').addClass('min');
     });
 
     return TestHarness;
