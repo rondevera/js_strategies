@@ -42,10 +42,19 @@
         "$('p.bar', $('div#foo'))": function(){
           return $('p.odd', $('div#jquery-test-container'));
         },
+        "$('p.bar', $('#foo'))": function(){
+          return $('p.odd', $('#jquery-test-container'));
+        },
         "$('div#foo p.bar')": function(){
           return $('div#jquery-test-container p.odd');
         },
+        "$('#foo p.bar')": function(){
+          return $('#jquery-test-container p.odd');
+        },
         "$('div#foo').find('p.bar')": function(){
+          return $('div#jquery-test-container').find('p.odd');
+        },
+        "$('#foo').find('p.bar')": function(){
           return $('div#jquery-test-container').find('p.odd');
         },
         "$('p.foo em')": function(){
